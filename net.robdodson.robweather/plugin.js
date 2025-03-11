@@ -1,8 +1,10 @@
-function load() {
-let uri = site;
+function load() 
+{
+	let uri = site;
 	const endpoint = `${site}&appid=${apikey}`;
 	sendRequest(endpoint)
-	.then((text) => {
+	.then((text) => 
+	{
 
 		let date = new Date();
 		const json = JSON.parse(text);
@@ -18,7 +20,8 @@ let uri = site;
 		let items = [item];
 		processResults(items);
 	})
-	.catch((requestError) => {
+	.catch((requestError) => 
+	{
 		processError(requestError);
 	});
 }
