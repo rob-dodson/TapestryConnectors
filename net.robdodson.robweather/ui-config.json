@@ -1,0 +1,13 @@
+{
+	"inputs": [
+		{
+			"name": "apikey",
+			"prompt": "API Key"
+		},
+		{
+			"name": "city",
+			"prompt": "Your City"
+		}
+	]
+}
+		
