@@ -8,28 +8,23 @@ function load()
 	{
 		const citylatlon = JSON.parse(latlon);
 		const weekday = ["sun","mon","tue","wed","thu","fri","sat"];
-
-		console.log(`SITE0 = ${site}`);
-	
 		const endpoint = `${site}&lat=${citylatlon[0].lat}&lon=${citylatlon[0].lon}&appid=${apikey}`;
 
-		console.log(`SITE1 = ${endpoint}`);
-		
 		sendRequest(endpoint)
 		.then((text) => 
 		{
-			let uri = site;
+			let uri = endpoint;
 
 			let date = new Date();
 			const json = JSON.parse(text);
 			
 			let item = Item.createWithUriDate(uri, date);
+			item.title = `${city} ${state} ${countrycode}`;
 
 			//
 			// now
 			//
 			let temp = Math.trunc(json.current.temp);
-			item.title = `${city} ${state} ${countrycode}`;
 			item.body = `<p><b>Now:</b> ${temp}&deg; ${json.current.weather[0].description}</p>`;
 
 			//
@@ -53,7 +48,7 @@ function load()
 			let tmintemp = Math.trunc(json.daily[1].temp.min);
 			let tmaxtemp = Math.trunc(json.daily[1].temp.max);
 
-			item.body = item.body + `<p><b>Tomorrow</b>(${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
+			item.body = item.body + `<p><b>Tomorrow</b> (${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
 			item.body = item.body + `${json.daily[1].weather[0].description}<br>`;
 			item.body = item.body + `${json.daily[1].summary}</p>`;
 
