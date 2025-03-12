@@ -6,11 +6,15 @@
 		},
 		{
 			"name": "city",
-			"prompt": "Your City"
+			"prompt": "City"
 		},
 		{
 			"name": "state",
-			"prompt": "Your State"
+			"prompt": "State"
+		},
+		{
+			"name": "countrycode",
+			"prompt": "Country Code"
 		}
 	]
 }

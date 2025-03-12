@@ -1,6 +1,6 @@
 {
 	"id": "net.robdodson.robweather",
 	"display_name": "RobWeather",
-	"site": "https://api.openweathermap.org/data/3.0/onecall?exclude=minutely&lat=47.258728&lon=-122.465973&units=imperial",	
+	"mainurl": "https://api.openweathermap.org/data/3.0/onecall?exclude=minutely&units=imperial",	
 	"icon": "https://frogradio.net/images/icon_128x128.png"
 }
