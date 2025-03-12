@@ -50,7 +50,7 @@ function load()
 
 			item.body = item.body + `<p><b>Tomorrow</b> (${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
 			item.body = item.body + `${json.daily[1].weather[0].description}<br>`;
-			item.body = item.body + `${json.daily[1].summary}</p>`;
+			item.body = item.body + `{json.daily[1].summary}</p>`;
 
 			let items = [item];
 			processResults(items);
