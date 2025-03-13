@@ -25,18 +25,8 @@ function load()
 			// now
 			//
 			let temp = Math.trunc(json.current.temp);
-			let cpop = json.hourly[0].pop; // precip prob
-			let cpop2 = json.hourly[3].pop; // precip prob
 
 			item.body = `<p><b>Now:</b> ${temp}&deg; ${json.current.weather[0].description}</p>`;
-			if (cpop != null)
-			{
-				item.body += `rain chance next hour: ${cpop * 100}%<br>`;
-			}
-			if (cpop2 != null)
-			{
-				item.body += `rain chance 3 hours: ${cpop2 * 100}%<br>`;
-			}
 
 			//
 			// today
@@ -47,20 +37,25 @@ function load()
 			let sunset = new Date(json.daily[0].sunset * 1000).toLocaleTimeString();
 			let clouds = json.daily[0].clouds;
 			let snow = json.daily[0].snow; // snow accum mm
-			let rain = json.daily[0].rain; // rain accu mm
 			let uvi = json.daily[0].uvi;
-			let pop = json.daily[0].pop; // precip prob
+			let cpop = json.hourly[0].pop; // precip prob
+			let cpop3 = json.hourly[3].pop; // precip prob
+			let cpop5 = json.hourly[5].pop; // precip prob
 
 			item.body = item.body + `<p><b>Today</b> (${weekday[date.getDay()]}): ${mintemp}&deg; - ${maxtemp}&deg;<br>`;
 			item.body += `${json.daily[0].weather[0].description}<br>`;
 			item.body += `clouds: ${clouds}%<br>`;
-			if (pop != null)
+			if (cpop != null)
 			{
-				item.body += `rain chance: ${pop * 100}%<br>`;
+				item.body += `rain next hour: ${cpop * 100}%<br>`;
 			}
-			if (rain != null)
+			if (cpop3 != null)
 			{
-				item.body += `rain accum: ${rain}mm<br>`;
+				item.body += `rain 3 hours: ${cpop3 * 100}%<br>`;
+			}
+			if (cpop5 != null)
+			{
+				item.body += `rain 5 hours: ${cpop5 * 100}%<br>`;
 			}
 			if (snow != null)
 			{
