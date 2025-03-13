@@ -25,7 +25,18 @@ function load()
 			// now
 			//
 			let temp = Math.trunc(json.current.temp);
+			let cpop = json.hourly[0].pop; // precip prob
+			let cpop2 = json.hourly[3].pop; // precip prob
+
 			item.body = `<p><b>Now:</b> ${temp}&deg; ${json.current.weather[0].description}</p>`;
+			if (cpop != null)
+			{
+				item.body += `rain chance next hour: ${cpop * 100}%<br>`;
+			}
+			if (cpop2 != null)
+			{
+				item.body += `rain chance 3 hours: ${cpop2 * 100}%<br>`;
+			}
 
 			//
 			// today
@@ -34,12 +45,31 @@ function load()
 			let maxtemp = Math.trunc(json.daily[0].temp.max);
 			let sunrise = new Date(json.daily[0].sunrise * 1000).toLocaleTimeString();
 			let sunset = new Date(json.daily[0].sunset * 1000).toLocaleTimeString();
+			let clouds = json.daily[0].clouds;
+			let snow = json.daily[0].snow; // snow accum mm
+			let rain = json.daily[0].rain; // rain accu mm
+			let uvi = json.daily[0].uvi;
+			let pop = json.daily[0].pop; // precip prob
 
 			item.body = item.body + `<p><b>Today</b> (${weekday[date.getDay()]}): ${mintemp}&deg; - ${maxtemp}&deg;<br>`;
-			item.body = item.body + `${json.daily[0].weather[0].description}<br>`;
-			item.body = item.body + `sunrise: ${sunrise}<br>`;
-			item.body = item.body + `sunset: ${sunset}<br>`;
-			item.body = item.body + `${json.daily[0].summary}</p>`;
+			item.body += `${json.daily[0].weather[0].description}<br>`;
+			item.body += `clouds: ${clouds}%<br>`;
+			if (pop != null)
+			{
+				item.body += `rain chance: ${pop * 100}%<br>`;
+			}
+			if (rain != null)
+			{
+				item.body += `rain accum: ${rain}mm<br>`;
+			}
+			if (snow != null)
+			{
+				item.body += `snow accum: ${snow}mm<br>`;
+			}
+			item.body += `uvi: ${uvi}<br>`;
+			item.body += `sunrise: ${sunrise}<br>`;
+			item.body += `sunset: ${sunset}<br>`;
+			item.body += `<i>${json.daily[0].summary}</i></p>`;
 
 			//
 			// tomorrow
@@ -47,10 +77,27 @@ function load()
 			let tomorrow = new Date(json.daily[1].dt * 1000)
 			let tmintemp = Math.trunc(json.daily[1].temp.min);
 			let tmaxtemp = Math.trunc(json.daily[1].temp.max);
+			let tpop = json.daily[1].pop; // Probability of precipitation
+			let tsnow = json.daily[1].snow; // snow accum mm
+			let train = json.daily[1].rain; // rain accu mm
+			let tuvi = json.daily[1].uvi;
 
-			item.body = item.body + `<p><b>Tomorrow</b> (${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
-			item.body = item.body + `${json.daily[1].weather[0].description}<br>`;
-			item.body = item.body + `{json.daily[1].summary}</p>`;
+			item.body += `<p><b>Tomorrow</b> (${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
+			item.body += `${json.daily[1].weather[0].description}<br>`;
+			if (tpop != null)
+			{
+				item.body += `rain chance: ${tpop * 100}%<br>`;
+			}
+			if (train != null)
+			{
+				item.body += `rain accum: ${train}mm<br>`;
+			}
+			if (tsnow != null)
+			{
+				item.body += `snow accum: ${tsnow}mm<br>`;
+			}
+			item.body += `uvi: ${tuvi}<br>`;
+			item.body += `<i>${json.daily[1].summary}</i></p>`;
 
 			let items = [item];
 			processResults(items);
