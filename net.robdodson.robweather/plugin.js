@@ -37,9 +37,9 @@ function load()
 			let clouds = json.daily[0].clouds;
 			let snow = json.daily[0].snow; // snow accum mm
 			let uvi = json.daily[0].uvi;
-			let cpop = json.hourly[0].pop; // precip prob
-			let cpop3 = json.hourly[3].pop; // precip prob
-			let cpop5 = json.hourly[5].pop; // precip prob
+			let cpop = Math.trunc(json.hourly[0].pop); // precip prob
+			let cpop3 = Math.trunc(json.hourly[3].pop); // precip prob
+			let cpop5 = Math.trunc(json.hourly[5].pop); // precip prob
 
 			item.body = item.body + `<p><b>Today</b> (${weekday[date.getDay()]}): ${mintemp}&deg; - ${maxtemp}&deg;<br>`;
 			item.body += `${json.daily[0].weather[0].description}<br>`;
@@ -71,7 +71,7 @@ function load()
 			let tomorrow = new Date(json.daily[1].dt * 1000)
 			let tmintemp = Math.trunc(json.daily[1].temp.min);
 			let tmaxtemp = Math.trunc(json.daily[1].temp.max);
-			let tpop = json.daily[1].pop; // Probability of precipitation
+			let tpop = Math.trunc(json.daily[1].pop); // Probability of precipitation
 			let tsnow = json.daily[1].snow; // snow accum mm
 			let tuvi = json.daily[1].uvi;
 
