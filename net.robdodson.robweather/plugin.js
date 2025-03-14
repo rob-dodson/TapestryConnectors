@@ -1,7 +1,6 @@
 function load() 
 {
 	const getcity = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${countrycode}&appid=${apikey}`;
-	console.log(`CITY = ${getcity}`);
 
 	sendRequest(getcity)
 	.then((latlon) =>
@@ -74,7 +73,6 @@ function load()
 			let tmaxtemp = Math.trunc(json.daily[1].temp.max);
 			let tpop = json.daily[1].pop; // Probability of precipitation
 			let tsnow = json.daily[1].snow; // snow accum mm
-			let train = json.daily[1].rain; // rain accu mm
 			let tuvi = json.daily[1].uvi;
 
 			item.body += `<p><b>Tomorrow</b> (${weekday[tomorrow.getDay()]}): ${tmintemp}&deg; - ${tmaxtemp}&deg;<br>`;
@@ -82,10 +80,6 @@ function load()
 			if (tpop != null)
 			{
 				item.body += `rain chance: ${tpop * 100}%<br>`;
-			}
-			if (train != null)
-			{
-				item.body += `rain accum: ${train}mm<br>`;
 			}
 			if (tsnow != null)
 			{

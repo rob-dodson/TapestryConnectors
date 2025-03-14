@@ -1,0 +1,7 @@
+#!/bin/bash
+sftp -b- robs << EOF
+cd /var/www/html/robdodson.net/public_html/TapestryConnectors
+put net.robdodson.robweather.tapestry
+exit
+EOF
+
